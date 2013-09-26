@@ -20,7 +20,7 @@ Rest.prototype = {
 		);
 	},
 	
-	restPOST : function(){		
+	restPOST : function(){	
 		dbQueries.action(
 			this.action, 
 			this.table, 
@@ -28,6 +28,7 @@ Rest.prototype = {
 			this.returnOutput.bind(this)
 		);
 	},
+	
 	restPUT : function(){
 		var params = {};		
 		for(var item in this.req.query){
@@ -53,7 +54,6 @@ Rest.prototype = {
 		);
 	},
 
-	
 	returnOutput: function(err, values){
 		if(err == null){
 			//TODO JSONFIY this
@@ -72,14 +72,13 @@ var request = function(req,res,callback){
 	//selects the function name
 	var fName = 'rest'+req.method;
 	
-	//exicutes the callback
 	//this seems a little redundant but ill let it stand so it comes back to this
-	var returnF = function(){
+	/*var returnF = function(){
 		callback();
-	}
+	}*/
 	
 	//runs the correct function
-	var myRest = new Rest(req,res,returnF);
+	var myRest = new Rest(req,res,callback);
 	myRest[fName]();
 	
 }
